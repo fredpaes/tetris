@@ -20,8 +20,14 @@ defmodule Tetris.Points do
 
   def rotate(points, degrees) do
     case degrees do
-      0 -> points |> transpose |> mirror
-      _ -> rotate(rotate(points, 0), (degrees - 90))
+      0 -> points
+      _ -> rotate(rotate_90(points), (degrees - 90))
     end
+  end
+
+  defp rotate_90(points) do
+    points
+      |> transpose
+      |> mirror
   end
 end
