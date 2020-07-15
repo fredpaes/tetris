@@ -6,7 +6,7 @@ defmodule Tetris.Brick do
     reflection: false
   ]
 
-  def new(attributes \\ []), do: __struct__()
+  def new(attributes \\ []), do: __struct__(attributes)
 
   def new_random do
     %__MODULE__{

@@ -33,7 +33,7 @@ defmodule BrickTest do
     points_brick = new_brick(name: :z)
       |> shape
 
-    assert {3, 3} not in points_brick
+    assert {2, 3} not in points_brick
   end
 
   test "should translate a list of points" do
