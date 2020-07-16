@@ -42,9 +42,26 @@ defmodule BrickTest do
       |> translate({1, 1})
       |> translate({0, 1})
 
-    assert actual_points !== []
+    assert actual_points == [{3, 3}, {3, 4}, {3, 5}, {3, 6}]
+  end
+
+  test "should flip rotate flip and mirror" do
+    [{1, 1}]
+      |> mirror
+      |> assert_point({4, 1})
+      |> flip
+      |> assert_point({4, 4})
+      |> rotate(90)
+      |> assert_point({1, 4})
+      |> rotate(90)
+      |> assert_point({1, 1})
   end
 
   # method to create a randow brick
   def new_brick(attributes \\ []), do: new(attributes)
+
+  def assert_point([actual], expected) do
+    assert actual == expected
+    [actual]
+  end
 end
