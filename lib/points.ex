@@ -38,6 +38,17 @@ defmodule Tetris.Points do
       |> mirror
   end
 
+  def with_color(points, color) do
+    Enum.map(points, fn point -> add_color(point, color) end)
+  end
+
+  defp add_color(point, color) do
+    case point do
+      {_x, _y, _z} -> point
+      {x, y} -> {x, y, color}
+    end
+  end
+
   def to_string(points) do
     map = points
       |> Enum.map(fn key -> {key, "■"} end)

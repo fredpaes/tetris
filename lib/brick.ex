@@ -103,6 +103,16 @@ defmodule Tetris.Brick do
     end
   end
 
+  def color(%{name: letter}) do
+    case letter do
+      :i -> :red
+      :l -> :blue
+      :z -> :green
+      :o -> :yellow
+      :t -> :purple
+    end
+  end
+
   def prepare(brick) do
     brick
       |> shape

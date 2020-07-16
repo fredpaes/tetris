@@ -57,6 +57,30 @@ defmodule BrickTest do
       |> assert_point({1, 1})
   end
 
+  test "should convert brick to string" do
+    actual = new_brick() |> Tetris.Brick.to_string
+    expected = "□□■□\n□□■□\n□□■□\n□□■□"
+
+    assert actual == expected
+  end
+
+  test "should inspect brick" do
+    actual = new_brick() |> inspect
+    expected = 
+      """
+      □□■□
+      □□■□
+      □□■□
+      □□■□
+       name: :i
+       location: {40, 0}
+       rotation: 0
+       reflection: false
+      """
+
+    assert "#{actual}\n" == expected
+  end
+
   # method to create a randow brick
   def new_brick(attributes \\ []), do: new(attributes)
 
