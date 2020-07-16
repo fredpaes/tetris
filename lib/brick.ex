@@ -1,4 +1,6 @@
 defmodule Tetris.Brick do
+  alias Tetris.Points
+
   defstruct [
     name: :i,
     location: {40, 0},
@@ -101,23 +103,32 @@ defmodule Tetris.Brick do
     end
   end
 
-  def to_string(block) do
-    map = block
+  def prepare(brick) do
+    brick
       |> shape
-      |> Enum.map(fn key -> {key, "■"} end)
-      |> Map.new
+      |> Points.rotate(brick.rotation)
+      |> Points.mirror(brick.reflection)
+  end
 
-    for y <- (1..4), x <- (1..4) do
-      Map.get(map, {x, y}, "□")
-    end
-      |> Enum.chunk_every(4)
-      |> Enum.map(&(Enum.join/1))
-      |> Enum.join("\n")
+  def to_string(brick) do
+    brick
+      |> __MODULE__.prepare
+      |> Points.to_string
   end
 
   def print(brick) do
-    IO.puts(__MODULE__.to_string(brick))
     brick
+      |> __MODULE__.prepare
+      |> Points.print
+    brick
+  end
+
+  defimpl Inspect, for: Tetris.Brick do
+    import Inspect.Algebra
+
+    def inspect(brick, _opts) do
+      concat([Tetris.Brick.to_string(brick), "\n name: ", inspect(brick.name), "\n location: ", inspect(brick.location), "\n rotation: ", inspect(brick.rotation), "\n reflection: ", inspect(brick.reflection)])
+    end
   end
 
 end

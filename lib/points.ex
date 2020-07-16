@@ -13,6 +13,13 @@ defmodule Tetris.Points do
       |> Enum.map(fn {x, y} -> {(5 - x), y} end)
   end
 
+  def mirror(points, bool) do
+    case bool do
+      true -> points
+      false -> mirror(points)
+    end
+  end
+
   def flip(points) do
     points
       |> Enum.map(fn {x, y} -> {x, (5 - y)} end)
@@ -30,4 +37,23 @@ defmodule Tetris.Points do
       |> transpose
       |> mirror
   end
+
+  def to_string(points) do
+    map = points
+      |> Enum.map(fn key -> {key, "■"} end)
+      |> Map.new
+
+    for y <- (1..4), x <- (1..4) do
+      Map.get(map, {x, y}, "□")
+    end
+      |> Enum.chunk_every(4)
+      |> Enum.map(&(Enum.join/1))
+      |> Enum.join("\n")
+  end
+
+  def print(points) do
+    IO.puts(__MODULE__.to_string(points))
+    points
+  end
+
 end
