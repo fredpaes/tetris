@@ -19,3 +19,5 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/tetris](https://hexdocs.pm/tetris).
 
+Course from [Tetris](https://github.com/groxio-learning/tetris-video)
+Advanced topic [Quadblock](https://github.com/groxio-learning/quadblock)
